@@ -34,13 +34,74 @@ console.log('customChunk output with array size 8 and window size -1',customChun
 console.log('customChunk output with array size 8 and window size 8',customChunk(arr, 8));
 */
 /////////////////////////Chunk function implementation end////////////////////////////////////
-function customSum(inputArray) {
-    var sum = 0;
-    for (var _i = 0, inputArray_1 = inputArray; _i < inputArray_1.length; _i++) {
-        var num = inputArray_1[_i];
-        sum += num;
-    }
-    return sum;
+// function customSum(inputArray:Array<number>){
+//   let sum = 0;
+//   for(let num of inputArray){
+//     sum += num;
+//   }
+//   return sum;
+// }
+// let numArr:number[] = [4,2,8,6];
+// console.log('customSum output with input [4,2,8,6] is =',customSum(numArr));
+function customFind(inputArray, obj) {
+    // console.log(inputArray);
+    // for(let i = 0; i < inputArray.length; i++){
+    //   if(typeof obj === 'function'){
+    //     if(obj(inputArray[i])){
+    //       return inputArray[i];
+    //     } 
+    //   }
+    // }
+    var result;
+    inputArray.forEach(function (user, index, arr) {
+        if (typeof obj === 'function') {
+            if (obj(user)) {
+                result = user;
+                arr.length = index + 1;
+            }
+        }
+        else if (Array.isArray(obj)) {
+            var userKeys = Object.keys(user);
+            if (userKeys.indexOf(obj[0]) !== -1) {
+                if (user[obj[0]] === obj[1]) {
+                    result = user;
+                    arr.length = index + 1;
+                }
+            }
+        }
+        else if (typeof obj === 'object') {
+            var userKeys_1 = Object.keys(user);
+            var objKeys = Object.keys(obj);
+            var bool_1 = true;
+            objKeys.forEach(function (objKey) {
+                if (userKeys_1.indexOf(objKey) !== -1) {
+                    bool_1 = bool_1 && (user[objKey] === obj[objKey]);
+                }
+            });
+            if (bool_1) {
+                result = user;
+                arr.length = index + 1;
+            }
+        }
+        else {
+            var userKeys = Object.keys(user);
+            if (userKeys.indexOf(obj) !== -1) {
+                result = user;
+                arr.length = index + 1;
+            }
+        }
+    });
+    return result;
 }
-var numArr = [4, 2, 8, 6];
-console.log('customSum output with input [4,2,8,6] is =', customSum(numArr));
+var users = [
+    { 'user': 'ravikiran', 'age': 36, 'active': true },
+    { 'user': 'fred', 'age': 30, 'active': false },
+    { 'user': 'barney', 'age': 36, 'active': false },
+    { 'user': 'fred', 'age': 30, 'active': false },
+];
+// let res = customFind(users, function(o) { return !o.active; })
+// console.log('res',res);
+console.log(customFind(users, function (o) { return !o.active; }));
+console.log(customFind(users, ['active', false]));
+console.log(customFind(users, 'active'));
+console.log(customFind(users, { 'age': 36, 'active': false }));

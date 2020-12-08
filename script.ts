@@ -34,13 +34,79 @@ console.log('customChunk output with array size 8 and window size -1',customChun
 console.log('customChunk output with array size 8 and window size 8',customChunk(arr, 8));
 */
 /////////////////////////Chunk function implementation end////////////////////////////////////
-function customSum(inputArray:Array<number>){
-  let sum = 0;
-  for(let num of inputArray){
-    sum += num;
-  }
-  return sum;
+// function customSum(inputArray:Array<number>){
+//   let sum = 0;
+//   for(let num of inputArray){
+//     sum += num;
+//   }
+//   return sum;
+// }
+
+// let numArr:number[] = [4,2,8,6];
+// console.log('customSum output with input [4,2,8,6] is =',customSum(numArr));
+
+function customFind(inputArray: Array<any>, obj: any){
+ // console.log(inputArray);
+  
+  // for(let i = 0; i < inputArray.length; i++){
+  //   if(typeof obj === 'function'){
+  //     if(obj(inputArray[i])){
+  //       return inputArray[i];
+  //     } 
+  //   }
+  // }
+  let result: any;
+  inputArray.forEach((user, index, arr) => {
+      if(typeof obj === 'function'){
+        if(obj(user)){
+          result = user;
+          arr.length = index + 1;
+        }
+    } else if(Array.isArray(obj)){
+      let userKeys = Object.keys(user);
+      if(userKeys.indexOf(obj[0]) !== -1){
+        if(user[obj[0]] === obj[1]){
+          result = user;
+          arr.length = index + 1;
+        }
+      }
+    } else if(typeof obj === 'object'){
+      let userKeys = Object.keys(user);
+      let objKeys = Object.keys(obj);
+      let bool = true;
+      objKeys.forEach(objKey => {
+        if(userKeys.indexOf(objKey) !== -1){
+          bool = bool && (user[objKey] === obj[objKey]);
+        }
+      });
+      if(bool){
+        result = user;
+        arr.length = index + 1;
+      }
+    } else {
+      let userKeys = Object.keys(user);
+      if(userKeys.indexOf(obj) !== -1){
+        result = user;
+        arr.length = index + 1;
+      }
+    }
+  })
+  return result;
 }
 
-let numArr:number[] = [4,2,8,6];
-console.log('customSum output with input [4,2,8,6] is =',customSum(numArr));
+var users = [
+  { 'user': 'ravikiran', 'age': 36, 'active': true },
+  { 'user': 'fred',   'age': 30, 'active': false },
+  { 'user': 'barney', 'age': 36, 'active': false },
+  { 'user': 'fred',   'age': 30, 'active': false },
+  
+];
+
+// let res = customFind(users, function(o) { return !o.active; })
+// console.log('res',res);
+console.log(customFind(users, function(o) { return !o.active; }));
+
+console.log(customFind(users, ['active', false]));
+
+console.log(customFind(users, 'active'));
+console.log(customFind(users, { 'age': 36, 'active': false }));
