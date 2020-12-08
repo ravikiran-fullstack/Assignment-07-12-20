@@ -68,3 +68,22 @@ function customNthEle(inputArray, elementAt){
 
 console.log('customNthEle', customNthEle(arr, -6));
 
+//////////////////////////_.take(arr)
+arr = ['a', 'b', 'c', 'd', 'e'];
+function customTake(arr, index = ''){
+  if(index === ''){
+    index = 1;
+  } else if( index > arr.length){
+    index = arr.length;
+  }
+
+  let take = [];
+  for(let i = 0; i < index; i++){
+    take.push(arr[i]);
+  }
+
+  return take;
+}
+
+
+console.log('customTake', customTake(arr,9));
