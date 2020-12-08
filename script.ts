@@ -1,6 +1,3 @@
-//_.chunk(['a', 'b', 'c', 'd'], 2);
-// => [['a', 'b'], ['c', 'd']]
-
 console.log('-----------------Chunk--------------------')
 function customChunk(inputArray:Array<any>, window?: number){
   if(window === undefined){
@@ -92,8 +89,6 @@ function customFind(inputArray: Array<any>, obj: any){
   })
   return result;
 }
-// let res = customFind(users, function(o) { return !o.active; })
-// console.log('res',res);
 console.log(customFind(users_1, function(o) { return !o.active; }));
 
 console.log(customFind(users_1, ['active', false]));
@@ -152,8 +147,6 @@ function customFilter(inputArray: Array<any>, obj: any){
   return result;
 }
 
-// let res = customFind(users, function(o) { return !o.active; })
-// console.log('res',res);
 console.log(customFilter(users_2, function(o) { return o.active; }));
 
 console.log(customFilter(users_2, ['active', false]));
