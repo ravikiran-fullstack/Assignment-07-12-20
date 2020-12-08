@@ -1,89 +1,33 @@
-let arr = [3,6,9,10,11];
-////////////////// - _.head
-
-function customHead(inputArray){
-  return inputArray[0];
-}
-console.log(customHead(arr))
-
-////////////////// - _.head
-function customTail(inputArray){
-  let tailArray = [];
-  for(let i = 1; i < inputArray.length; i++){
-    tailArray.push(inputArray[i]);
-  }
-  return tailArray;
-}
-console.log(customTail(arr));
-
-//////////////// _.first
-function customFirst(inputArray){
-  return inputArray[0];
-}
-console.log(customFirst(arr));
-//////////////// _.last
-function customLast(inputArray){
-  return inputArray[inputArray.length-1];
-}
-
-console.log('customLast',customLast(arr));
-
-////////////// _-lastIndexOf()
-//let arr = [3,6,9,10,11];
-function customLastIndexOf(inputArray, ele, fromIndex = ''){
-  let from;
-  if(fromIndex !== ''){
-    if(fromIndex > inputArray.length){
-      from = inputArray.length - 1;
-    } else {
-      from = fromIndex;
+//_.chunk(['a', 'b', 'c', 'd'], 2);
+// => [['a', 'b'], ['c', 'd']]
+function customChunk(inputArray, window) {
+    if (window === undefined) {
+        window = 1;
     }
-  } else {
-    from = inputArray.length - 1;
-  }
-  for(let i = from; i >= 0; i--){
-    
-    if(inputArray[i] === ele){
-      return i;
+    else if (window <= 0) {
+        return [];
     }
-  }
-  return -1;
-}
-
-console.log('customLastIndexOf', 9,' = in ', arr ,' is ',customLastIndexOf(arr, 9, 3));
-
-//////////////////////////_.nth(array, elementAt)
- arr = ['a', 'b', 'c', 'd', 'e'];
-function customNthEle(inputArray, elementAt){
-  if(elementAt >= 0){
-    return inputArray[elementAt];
-  } else{
-    let index = inputArray.length + elementAt;
-    if(index < 0){
-      return undefined;
+    else if (window > inputArray.length) {
+        window = inputArray.length;
     }
-    return inputArray[index];
-  }
+    var resultArr = [];
+    var len = inputArray.length;
+    for (var i = 0; i < len; i = i + window) {
+        var temp = [];
+        for (var j = i; j < (i + window) && j < len; j++) {
+            temp.push(inputArray[j]);
+        }
+        resultArr.push(temp);
+    }
+    //console.log(resultArr);
+    return resultArr;
 }
-
-console.log('customNthEle', customNthEle(arr, -6));
-
-//////////////////////////_.take(arr)
-arr = ['a', 'b', 'c', 'd', 'e'];
-function customTake(arr, index = ''){
-  if(index === ''){
-    index = 1;
-  } else if( index > arr.length){
-    index = arr.length;
-  }
-
-  let take = [];
-  for(let i = 0; i < index; i++){
-    take.push(arr[i]);
-  }
-
-  return take;
-}
-
-
-console.log('customTake', customTake(arr,9));
+var arr = ['a', 'b', 'c', 'd', 'a', 'b', 'c', 'd'];
+console.log('customChunk output with array size 8 and window size 3', customChunk(arr, 3));
+console.log('customChunk output with array size 8 and window size 2', customChunk(arr, 2));
+console.log('customChunk output with array size 8 and window size 1', customChunk(arr, 1));
+console.log('customChunk output with array size 8 and window size 0', customChunk(arr, 0));
+console.log('customChunk output with array size 8 and window size undefined', customChunk(arr));
+console.log('customChunk output with array size 8 and window size -1', customChunk(arr, -1));
+console.log('customChunk output with array size 8 and window size 8', customChunk(arr, 8));
+/////////////////////////Chunk function implementation end////////////////////////////////////
