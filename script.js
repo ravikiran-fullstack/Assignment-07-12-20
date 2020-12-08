@@ -96,7 +96,13 @@ function customFind(inputArray, obj) {
 console.log(customFind(users_1, function (o) { return !o.active; }));
 console.log(customFind(users_1, ['active', false]));
 console.log(customFind(users_1, 'active'));
-console.log(customFind(users_1, { 'age': 36, 'active': false }));
+var users_3 = [
+    { 'user': 'ravikiran', 'age': 36, 'active': true },
+    { 'user': 'Henry', 'age': 30, 'active': false },
+    { 'user': 'barney', 'age': 36, 'active': false },
+    { 'user': 'fred', 'age': 30, 'active': false },
+];
+console.log(customFind(users_3, { 'age': 36, 'active': false }));
 console.log('-----------------Filter--------------------');
 var users_2 = [
     { 'user': 'ravikiran', 'age': 36, 'active': true },
@@ -148,3 +154,27 @@ console.log(customFilter(users_2, function (o) { return o.active; }));
 console.log(customFilter(users_2, ['active', false]));
 console.log(customFilter(users_2, 'active'));
 console.log(customFilter(users_2, { 'age': 30, 'active': false }));
+console.log('---------------------------Reduce------------------------');
+function customReduce(input, fun, initialValue) {
+    var result = initialValue;
+    if (Array.isArray(input)) {
+        input.forEach(function (element) {
+            result = fun(result, element);
+        });
+    }
+    else {
+        for (var key in input) {
+            result = fun(result, input[key], key);
+        }
+    }
+    return result;
+}
+var result1 = customReduce([1, 2], function (sum, n) {
+    return sum + n;
+}, 0);
+console.log('customReduce method ', result1);
+var result2 = customReduce({ 'a': 1, 'b': 2, 'c': 1 }, function (result, value, key) {
+    (result[value] || (result[value] = [])).push(key);
+    return result;
+}, {});
+console.log('customReduce method ', result2);

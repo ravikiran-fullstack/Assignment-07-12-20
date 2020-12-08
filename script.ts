@@ -1,5 +1,6 @@
 //_.chunk(['a', 'b', 'c', 'd'], 2);
 // => [['a', 'b'], ['c', 'd']]
+
 console.log('-----------------Chunk--------------------')
 function customChunk(inputArray:Array<any>, window?: number){
   if(window === undefined){
@@ -98,7 +99,15 @@ console.log(customFind(users_1, function(o) { return !o.active; }));
 console.log(customFind(users_1, ['active', false]));
 
 console.log(customFind(users_1, 'active'));
-console.log(customFind(users_1, { 'age': 36, 'active': false }));
+
+let users_3 = [
+  { 'user': 'ravikiran', 'age': 36, 'active': true },
+  { 'user': 'Henry',   'age': 30, 'active': false },
+  { 'user': 'barney', 'age': 36, 'active': false },
+  { 'user': 'fred',   'age': 30, 'active': false },
+];
+
+console.log(customFind(users_3, { 'age': 36, 'active': false }));
 
 console.log('-----------------Filter--------------------')
 let users_2 = [
@@ -151,3 +160,31 @@ console.log(customFilter(users_2, ['active', false]));
 
 console.log(customFilter(users_2, 'active'));
 console.log(customFilter(users_2, { 'age': 30, 'active': false }));
+
+console.log('---------------------------Reduce------------------------');
+function customReduce(input:any, fun: any, initialValue: any){
+  let result = initialValue;
+  if(Array.isArray(input)){
+    input.forEach(element => {
+      result = fun(result, element);
+    });
+  } else {
+    for (const key in input) {
+      result = fun(result, input[key], key);
+    }
+  }
+  return result;
+}
+
+let result1 = customReduce([1, 2], function(sum, n) {
+  return sum + n;
+}, 0);
+
+console.log('customReduce method ',result1);
+
+let result2 = customReduce({ 'a': 1, 'b': 2, 'c': 1 }, function(result, value, key) {
+  (result[value] || (result[value] = [])).push(key);
+  return result;
+}, {});
+
+console.log('customReduce method ',result2);
