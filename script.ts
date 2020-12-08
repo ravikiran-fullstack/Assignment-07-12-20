@@ -1,6 +1,6 @@
 //_.chunk(['a', 'b', 'c', 'd'], 2);
 // => [['a', 'b'], ['c', 'd']]
-
+/*
 function customChunk(inputArray:Array<any>, window?: number){
   if(window === undefined){
     window = 1;
@@ -32,5 +32,15 @@ console.log('customChunk output with array size 8 and window size 0',customChunk
 console.log('customChunk output with array size 8 and window size undefined',customChunk(arr));
 console.log('customChunk output with array size 8 and window size -1',customChunk(arr, -1));
 console.log('customChunk output with array size 8 and window size 8',customChunk(arr, 8));
-
+*/
 /////////////////////////Chunk function implementation end////////////////////////////////////
+function customSum(inputArray:Array<number>){
+  let sum = 0;
+  for(let num of inputArray){
+    sum += num;
+  }
+  return sum;
+}
+
+let numArr:number[] = [4,2,8,6];
+console.log('customSum output with input [4,2,8,6] is =',customSum(numArr));
