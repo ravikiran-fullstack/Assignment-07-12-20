@@ -52,3 +52,19 @@ function customLastIndexOf(inputArray, ele, fromIndex = ''){
 
 console.log('customLastIndexOf', 9,' = in ', arr ,' is ',customLastIndexOf(arr, 9, 3));
 
+//////////////////////////_.nth(array, elementAt)
+ arr = ['a', 'b', 'c', 'd', 'e'];
+function customNthEle(inputArray, elementAt){
+  if(elementAt >= 0){
+    return inputArray[elementAt];
+  } else{
+    let index = inputArray.length + elementAt;
+    if(index < 0){
+      return undefined;
+    }
+    return inputArray[index];
+  }
+}
+
+console.log('customNthEle', customNthEle(arr, -6));
+
