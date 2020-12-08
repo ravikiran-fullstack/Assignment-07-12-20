@@ -46,15 +46,6 @@ console.log('customChunk output with array size 8 and window size 8',customChunk
 // console.log('customSum output with input [4,2,8,6] is =',customSum(numArr));
 
 function customFind(inputArray: Array<any>, obj: any){
- // console.log(inputArray);
-  
-  // for(let i = 0; i < inputArray.length; i++){
-  //   if(typeof obj === 'function'){
-  //     if(obj(inputArray[i])){
-  //       return inputArray[i];
-  //     } 
-  //   }
-  // }
   let result: any;
   inputArray.forEach((user, index, arr) => {
       if(typeof obj === 'function'){
