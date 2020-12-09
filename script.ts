@@ -95,17 +95,17 @@ console.log(customFind(users_1, ['active', false]));
 
 console.log(customFind(users_1, 'active'));
 
-let users_3 = [
+let users_2 = [
   { 'user': 'ravikiran', 'age': 36, 'active': true },
   { 'user': 'Henry',   'age': 30, 'active': false },
   { 'user': 'barney', 'age': 36, 'active': false },
   { 'user': 'fred',   'age': 30, 'active': false },
 ];
 
-console.log(customFind(users_3, { 'age': 36, 'active': false }));
+console.log(customFind(users_2, { 'age': 36, 'active': false }));
 
 console.log('-----------------Filter--------------------')
-let users_2 = [
+let users_3 = [
   { 'user': 'ravikiran', 'age': 36, 'active': true },
   { 'user': 'Henry',   'age': 30, 'active': false },
   { 'user': 'barney', 'age': 36, 'active': false },
@@ -147,12 +147,12 @@ function customFilter(inputArray: Array<any>, obj: any){
   return result;
 }
 
-console.log(customFilter(users_2, function(o) { return o.active; }));
+console.log(customFilter(users_3, function(o) { return o.active; }));
 
-console.log(customFilter(users_2, ['active', false]));
+console.log(customFilter(users_3, ['active', false]));
 
-console.log(customFilter(users_2, 'active'));
-console.log(customFilter(users_2, { 'age': 30, 'active': false }));
+console.log(customFilter(users_3, 'active'));
+console.log(customFilter(users_3, { 'age': 30, 'active': false }));
 
 console.log('---------------------------Reduce------------------------');
 function customReduce(input:any, fun: any, initialValue: any){

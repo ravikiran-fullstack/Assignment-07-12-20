@@ -1,5 +1,3 @@
-//_.chunk(['a', 'b', 'c', 'd'], 2);
-// => [['a', 'b'], ['c', 'd']]
 console.log('-----------------Chunk--------------------');
 function customChunk(inputArray, window) {
     if (window === undefined) {
@@ -91,20 +89,18 @@ function customFind(inputArray, obj) {
     });
     return result;
 }
-// let res = customFind(users, function(o) { return !o.active; })
-// console.log('res',res);
 console.log(customFind(users_1, function (o) { return !o.active; }));
 console.log(customFind(users_1, ['active', false]));
 console.log(customFind(users_1, 'active'));
-var users_3 = [
+var users_2 = [
     { 'user': 'ravikiran', 'age': 36, 'active': true },
     { 'user': 'Henry', 'age': 30, 'active': false },
     { 'user': 'barney', 'age': 36, 'active': false },
     { 'user': 'fred', 'age': 30, 'active': false },
 ];
-console.log(customFind(users_3, { 'age': 36, 'active': false }));
+console.log(customFind(users_2, { 'age': 36, 'active': false }));
 console.log('-----------------Filter--------------------');
-var users_2 = [
+var users_3 = [
     { 'user': 'ravikiran', 'age': 36, 'active': true },
     { 'user': 'Henry', 'age': 30, 'active': false },
     { 'user': 'barney', 'age': 36, 'active': false },
@@ -148,12 +144,10 @@ function customFilter(inputArray, obj) {
     });
     return result;
 }
-// let res = customFind(users, function(o) { return !o.active; })
-// console.log('res',res);
-console.log(customFilter(users_2, function (o) { return o.active; }));
-console.log(customFilter(users_2, ['active', false]));
-console.log(customFilter(users_2, 'active'));
-console.log(customFilter(users_2, { 'age': 30, 'active': false }));
+console.log(customFilter(users_3, function (o) { return o.active; }));
+console.log(customFilter(users_3, ['active', false]));
+console.log(customFilter(users_3, 'active'));
+console.log(customFilter(users_3, { 'age': 30, 'active': false }));
 console.log('---------------------------Reduce------------------------');
 function customReduce(input, fun, initialValue) {
     var result = initialValue;
